@@ -1,5 +1,5 @@
 import pygame
-
+import button
 pygame.init()
 
 bounds = (360, 648)
@@ -22,11 +22,9 @@ clock = pygame.time.Clock()
 while run:
     screen.fill('#FFFFFF')
     mousePos = pygame.mouse.get_pos()
+    colorHover = '#F9F06F'
     color = '#F9F01F'
-    if 360 > mousePos[0] > 360 - 90 and 640 > mousePos[1] > 640 - 82:
-        color = '#F9F06F'
-    pygame.draw.rect(screen, color, (360 - 90, 640 - 82, 90, 90))
-    draw_text(screen, '=', 50, 360 - 55, 640 - 65, '#FFFFFF')
+    button.Button(color, colorHover, '=', 360, 648, bounds, 360 - 90, 640 - 82)
     pygame.draw.rect(screen, '#000000', (360 - 180, 640 - 82, 90, 90))
 
     for event in pygame.event.get():

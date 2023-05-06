@@ -4,6 +4,7 @@ pygame.init()
 
 bounds = (360, 648)
 screen = pygame.display.set_mode(bounds)
+buttons = []
 
 pygame.display.set_caption('Calculator')
 
@@ -17,14 +18,27 @@ def draw_text(screen, text, size, x, y, color):
     screen.blit(text_image, text_rect)
 
 
+buttonsObject = []
+i = 1
+height = 90
+width = 360
 run = True
 clock = pygame.time.Clock()
+
+for btn in buttons:
+    if i % 4 == 0:
+        height += 90
+        width = 360
+    buttonsObject.append(button.Button('#000000', '#696969', btn, 180 if i == 1 else 90, 90, bounds, bounds[0] - width, bounds[1] - height))
+
+
+
 while run:
     screen.fill('#FFFFFF')
     mousePos = pygame.mouse.get_pos()
     colorHover = '#F9F06F'
     color = '#F9F01F'
-    button.Button(color, colorHover, '=', 360, 648, bounds, 360 - 90, 640 - 82)
+
     pygame.draw.rect(screen, '#000000', (360 - 180, 640 - 82, 90, 90))
 
     for event in pygame.event.get():
@@ -33,6 +47,8 @@ while run:
     key = pygame.key.get_pressed()
 
     clock.tick(60)
+    for btn in buttonsObject:
+        btn.draw(screen)
 
     pygame.display.flip()
 pygame.quit()
